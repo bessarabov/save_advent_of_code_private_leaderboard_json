@@ -19,6 +19,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    - name: Add version information
+      run: sed -i "s/^VERSION =.*/VERSION = '${{ github.ref_name }}'/" script.py
+
     - name: Build docker image
       run: docker build . --tag bessarabov/save_advent_of_code_private_leaderboard_json:${{ github.ref_name }}
 

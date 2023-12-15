@@ -4,6 +4,8 @@ import json
 import requests
 from datetime import datetime, timezone
 
+VERSION = 'dev'
+
 class DataFetchError(Exception):
     pass
 
@@ -35,6 +37,7 @@ def get_private_leaderboard_json(settings):
 
     headers = {
         'Cookie': f'session={settings["cookie_session"]}',
+        'User-Agent': 'save_advent_of_code_private_leaderboard_json:' + VERSION
     }
 
     try:
@@ -62,7 +65,7 @@ def write_file(file_name, content):
 
 if __name__ == '__main__':
 
-    log_message('Started')
+    log_message('Started save_advent_of_code_private_leaderboard_json:' + VERSION)
 
     settings = get_data_from_json_file('/input/settings.json')
 
